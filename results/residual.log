@@ -1,0 +1,22 @@
+Fixed-P residual: extend L at fixed P (g=delta=P/L). Larger L = smaller g =
+smaller per-turn resource step. If alpha* CONVERGES -> residual is discretization
+(numerical, vanishes in continuum limit). If it keeps moving -> a real 2nd group.
+
+P = 1.0
+    L      g=d   alpha*  decrement
+    5  0.20000    2.650           
+   10  0.10000    2.800     +0.150
+   20  0.05000    2.550     -0.250
+   40  0.02500    1.950     -0.600
+   80  0.01250    1.450     -0.500
+  160  0.00625    1.200     -0.250
+
+P = 0.5
+    L      g=d   alpha*  decrement
+    5  0.10000    1.450           
+   10  0.05000    1.250     -0.200
+   20  0.02500    1.050     -0.200
+   40  0.01250    1.000     -0.050
+   80  0.00625    1.000     +0.000
+  160  0.00313    1.000     +0.000
+

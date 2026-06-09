@@ -1,0 +1,12 @@
+P=1.5. Does tying the replicator step to g (eta=g/0.15) remove the hump?
+
+mode                       L=5    L=10   L=20   L=40 
+--------------------------------------------------------
+eta=1  (unscaled, orig)     3.9   5.3   6.5   5.9   [HUMP]
+eta=g/g_ref (3 clocks tied)  None   5.3   4.4   4.2   [monotone]
+
+Fixed-P residual check at P=1.0 (orig drifted 2.7,2.8,2.6,2.0):
+mode                       L=5    L=10   L=20   L=40 
+--------------------------------------------------------
+eta=1  (unscaled, orig)     2.7   2.8   2.6   2.0
+eta=g/g_ref (3 clocks tied)  3.0   2.5   2.2   2.0

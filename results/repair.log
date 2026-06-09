@@ -1,0 +1,33 @@
+alpha*(b): protection threshold vs repair-coupling strength b.  b=0 = dead repair (C/D only).
+alpha* UP with b => repair SUBSIDIZES (protection harder). DOWN => repair helps.
+
+P=0.75 L=5 (fast clock)
+     b   alpha*    <fR>    <fD>
+   0.0     2.10   0.003   0.165
+   0.5     2.10   0.003   0.165 (neutral)
+   1.0     2.10   0.004   0.174 (neutral)
+   2.0     2.00   0.006   0.155 (helps)
+   4.0     2.20   0.036   0.209 (subsidy)
+   8.0     3.20   0.427   0.398 (subsidy)
+  16.0     2.60   0.526   0.458 (subsidy)
+
+P=1.0  L=5 (fast clock)
+     b   alpha*    <fR>    <fD>
+   0.0     2.70   0.003   0.155
+   0.5     2.70   0.003   0.146 (neutral)
+   1.0     2.70   0.004   0.145 (neutral)
+   2.0     2.70   0.005   0.158 (neutral)
+   4.0     2.80   0.029   0.181 (subsidy)
+   8.0     5.40   0.244   0.255 (subsidy)
+  16.0     None                
+
+P=1.0  L=10(slow clock)
+     b   alpha*    <fR>    <fD>
+   0.0     2.80   0.003   0.148
+   0.5     2.80   0.003   0.155 (neutral)
+   1.0     2.80   0.004   0.148 (neutral)
+   2.0     2.80   0.005   0.164 (neutral)
+   4.0     4.00   0.011   0.196 (subsidy)
+   8.0     4.50   0.454   0.467 (subsidy)
+  16.0     2.80   0.508   0.481 (neutral)
+

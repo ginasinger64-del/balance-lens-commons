@@ -1,0 +1,31 @@
+Method B: sub-step resource integration at FIXED (g, delta, L). n=1 is the orig model.
+If alpha* converges as n grows, the residual IS resource-discretization and we can
+read off the discretization-free alpha* at each cell.
+
+P=1.0 L=40 (g=delta=0.02500)
+ nsub   alpha*  decrement
+    1    1.950           
+    2    1.950     +0.000
+    4    1.950     +0.000
+    8    1.950     +0.000
+   16    1.950     +0.000
+   32    1.950     +0.000
+
+P=1.0 L=80 (g=delta=0.01250)
+ nsub   alpha*  decrement
+    1    1.450           
+    2    1.450     +0.000
+    4    1.450     +0.000
+    8    1.500     +0.050
+   16    1.500     +0.000
+   32    1.500     +0.000
+
+P=0.5 L=40 (g=delta=0.01250)
+ nsub   alpha*  decrement
+    1    0.850           
+    2    0.850     +0.000
+    4    0.850     +0.000
+    8    0.850     +0.000
+   16    0.850     +0.000
+   32    0.850     +0.000
+

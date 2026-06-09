@@ -1,0 +1,19 @@
+alpha*(lag)  — flat repair, floor-liftoff threshold min_R>1.0
+    g  delta | L=1  L=3  L=5  L=10 L=20
+----------------------------------------------------
+ 0.05   0.05 | 1.00  1.00  1.00  1.25  2.75
+ 0.10   0.10 | 1.00  1.25  1.50  3.00   None
+ 0.20   0.20 | 1.25  1.75  2.75   None   None
+ 0.30   0.30 | 1.50  2.25  4.00   None   None
+
+COLLAPSE TEST: does (delta*lag, g*lag) control alpha*?
+If yes, these pairs should give the SAME alpha*:
+  g=.10 d=.10 L=10 (d*L=1.00, g*L=1.00) -> alpha* = 3.00
+  g=.20 d=.20 L=5  (d*L=1.00, g*L=1.00) -> alpha* = 2.75
+  --------------------
+  g=.05 d=.05 L=20 (d*L=1.00, g*L=1.00) -> alpha* = 2.75
+  g=.10 d=.10 L=10 (d*L=1.00, g*L=1.00) -> alpha* = 3.00
+  g=.20 d=.20 L=5  (d*L=1.00, g*L=1.00) -> alpha* = 2.75
+  --------------------
+  g=.05 d=.05 L=10 (d*L=0.50, g*L=0.50) -> alpha* = 1.25
+  g=.10 d=.10 L=5  (d*L=0.50, g*L=0.50) -> alpha* = 1.50

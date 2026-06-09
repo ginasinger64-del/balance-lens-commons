@@ -1,0 +1,9 @@
+FINITE-N (N=300) + FERMI imitation. a=2.0, g=delta=0.20, kappa=2, cost=1, redist=1.
+Mean-field predicts: repair high fD (subsidy/no protect); unfunded enforce DEAD f2,
+high fD; self-funded LOW fD, high f2 (protected). 3 seeds averaged.
+
+condition                   mean_fD   mean_R   min_R  mean_f2
+baseline C/D                  0.002      0.0     0.0    0.405
+repair b=8                    0.400     55.3     0.0    0.439
+enforce unfunded cost=1       0.002      0.0     0.0    0.002
+self-funded cost=1            0.002      0.0     0.0    0.002

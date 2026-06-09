@@ -1,0 +1,25 @@
+=== repair FLAT (dominated) — defect vs coop only ===
+   a  mean_fD  sd_fD  mean_R   sd_R  min_R     R*  regime
+ 0.5    0.246  0.375    20.1  22.16    0.0   17.4  OSCILLATION
+ 1.0    0.204  0.351    26.9  29.49    0.0   41.7  OSCILLATION
+ 1.5    0.171  0.321    29.9  31.87    0.0   55.8  OSCILLATION
+ 2.0    0.153  0.299    32.7  33.28    0.0   64.5  OSCILLATION
+ 2.5    0.234  0.333    57.9  26.65   14.6   70.5  OSCILLATION
+ 3.0    0.235  0.322    65.2  23.11   25.4   74.7  OSCILLATION
+ 4.0    0.220  0.297    72.9  18.87   39.0   80.3  OSCILLATION
+ 5.0    0.202  0.274    77.5  16.17   47.7   83.9  OSCILLATION
+ 6.0    0.185  0.254    80.6  14.21   53.9   86.4  OSCILLATION
+ 8.0    0.159  0.220    84.6  11.52   62.6   89.6  OSCILLATION
+
+=== repair COUPLED (pays more as R falls) — can a restoring strategy survive? ===
+   a  mean_fD  sd_fD  mean_R   sd_R  min_R     R*  regime
+ 0.5    0.576  0.445    52.0  39.28    0.0   17.4  DEFECT dominates
+ 1.0    0.542  0.445    55.2  38.52    0.0   41.7  DEFECT dominates
+ 1.5    0.513  0.444    57.6  37.63    0.0   55.8  DEFECT dominates
+ 2.0    0.484  0.441    59.4  36.76    0.0   64.5  OSCILLATION
+ 2.5    0.456  0.435    60.9  35.89    0.0   70.5  OSCILLATION
+ 3.0    0.413  0.416    63.9  33.03    8.5   74.7  OSCILLATION
+ 4.0    0.319  0.370    70.0  26.75   26.3   80.3  OSCILLATION
+ 5.0    0.266  0.339    74.2  22.42   36.0   83.9  OSCILLATION
+ 6.0    0.198  0.266    80.2  15.16   52.2   86.4  OSCILLATION
+ 8.0    0.165  0.226    84.5  11.90   61.9   89.6  OSCILLATION

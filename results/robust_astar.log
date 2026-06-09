@@ -1,0 +1,7 @@
+P=1.5: does the alpha* hump at L=20 survive a more robust criterion?
+
+criterion              L=5    L=10   L=20   L=40 
+----------------------------------------------------
+min_R>1   (original)    3.9   5.3   6.5   5.9   [HUMP]
+p5_R>5    (robust)      4.0   5.5   6.9   6.5   [HUMP]
+<2%% time below 2       3.9   5.4   6.6   6.1   [HUMP]

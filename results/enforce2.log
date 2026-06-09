@@ -1,0 +1,24 @@
+Self-funding enforcement, cell P=1.0 L=5, kappa=2. Unfunded (redist=0) died at cost>=0.5.
+Does funding hold protection at positive cost? alpha* low + fE up + fD low = yes.
+
+redist = 0.0
+  cost   alpha*    <fE>    <fD>   sd_fD
+   0.5     2.50   0.020   0.133   0.254
+   1.0     2.60   0.009   0.145   0.261
+   2.0     2.60   0.004   0.135   0.256
+   4.0     2.60   0.002   0.132   0.255
+
+redist = 0.5
+  cost   alpha*    <fE>    <fD>   sd_fD
+   0.5     0.50   0.584   0.070   0.153
+   1.0     2.40   0.037   0.145   0.262
+   2.0     3.10   0.009   0.167   0.262
+   4.0     2.60   0.003   0.145   0.263
+
+redist = 1.0
+  cost   alpha*    <fE>    <fD>   sd_fD
+   0.5     0.50   0.529   0.026   0.052
+   1.0     0.50   0.566   0.089   0.186
+   2.0     2.50   0.054   0.163   0.266
+   4.0     3.10   0.005   0.166   0.263
+

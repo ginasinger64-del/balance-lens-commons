@@ -1,0 +1,12 @@
+MECHANISM DISCRIMINATION. cell P=1.0 L=5, kappa=2, cost=1, redist=1.
+Same suppression + same total loot; only the RECIPIENT differs.
+
+scheme          min_R   <fE>   <fD>   reading
+unfunded          0.0  0.008  0.002   enforcers DEAD, no protection
+selffund         47.8  0.479  0.107   ENFORCERS LIVE, protected
+pooled_all        0.0  0.008  0.002   enforcers DEAD, no protection
+pooled_CE         0.0  0.008  0.002   enforcers DEAD, no protection
+
+Predictions:  C(funding-align): selffund LIVES, both pooled DIE.
+              B(cause/symptom): all that suppress should protect (needs E to persist).
+              A(resource-coupl): pooled_all worse fD than pooled_CE (loot subsidizes D).

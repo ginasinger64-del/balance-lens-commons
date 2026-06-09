@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Commons Dynamics — does protection survive?</title>
+<style>
+  :root{
+    --ink:#11151B; --panel:#181E27; --panel2:#1E2630; --rule:#2B3440;
+    --txt:#E9EEF4; --mut:#8B97A6; --coop:#5BBF90; --def:#E2564B;
+    --enf:#D9A441; --res:#4F8FB0;
+    --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+    --sans:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ink);color:var(--txt);font-family:var(--sans)}
+  .wrap{max-width:960px;margin:0 auto;padding:28px 20px 40px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--enf);
+    text-transform:uppercase;margin-bottom:10px}
+  h1{font-size:30px;line-height:1.1;font-weight:700;margin:0 0 8px;letter-spacing:-.02em}
+  .sub{color:var(--mut);margin:0 0 22px;max-width:620px;font-size:15px}
+  .controls{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:20px}
+  .switch{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:6px;
+    display:flex;gap:4px;flex:1 1 360px}
+  .seg{flex:1;text-align:left;cursor:pointer;background:transparent;border:1px solid transparent;
+    border-radius:9px;padding:10px 12px;color:var(--mut);transition:all .15s;font-family:var(--sans)}
+  .seg .t{font-size:14px;font-weight:700}
+  .seg .m{font-family:var(--mono);font-size:10.5px;color:var(--mut);margin-top:2px}
+  .seg.active{background:var(--panel2);border-color:rgba(217,164,65,.33);color:var(--txt)}
+  .seg.active .m{color:var(--enf)}
+  .play{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:10px 14px;
+    flex:1 1 280px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+  .row{display:flex;align-items:center;gap:10px}
+  .btn{cursor:pointer;background:var(--enf);color:var(--ink);border:none;border-radius:8px;
+    padding:7px 16px;font-weight:700;font-size:13px;min-width:84px;font-family:var(--sans)}
+  .btn.ghost{background:transparent;color:var(--mut);border:1px solid var(--rule);font-weight:500}
+  .gen{font-family:var(--mono);font-size:12px;color:var(--mut);margin-left:auto}
+  .gen b{color:var(--txt);font-weight:500}
+  label.cost{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--mut)}
+  input[type=range]{flex:1;accent-color:var(--enf)}
+  .costval{font-family:var(--mono);color:var(--txt);min-width:28px}
+  .grid{display:grid;gap:16px;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)}
+  @media(max-width:680px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:16px}
+  .ph{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+  .ph .pt{font-size:13px;font-weight:700}.ph .ps{color:var(--mut);font-size:11.5px}
+  .legend{display:flex;gap:16px;margin-top:8px;flex-wrap:wrap}
+  .lg{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--mut)}
+  .lg i{width:14px;height:3px;border-radius:2px;display:inline-block}
+  .stat{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--rule)}
+  .stat i{width:9px;height:9px;border-radius:2px;flex-shrink:0;display:inline-block}
+  .stat .sl{color:var(--mut);font-size:13px}
+  .stat .sv{margin-left:auto;font-family:var(--mono);color:#fff;font-size:14px;font-weight:500}
+  .stat.big .sv{font-size:18px;font-weight:700}
+  .verdict{margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--panel2);
+    border:1px solid var(--rule);min-height:84px}
+  .verdict .vk{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--mut);margin-bottom:6px}
+  .verdict .vb{font-size:13.5px;line-height:1.45}
+  .verdict.win{background:#13251C;border-color:rgba(91,191,144,.33)}
+  .verdict.lose{background:#2A1714;border-color:rgba(226,86,75,.33)}
+  .axis{fill:var(--mut);font-family:var(--mono);font-size:10px}
+  .gl{stroke:var(--rule);stroke-dasharray:2 4}
+  .foot{color:var(--mut);font-size:12px;line-height:1.5;margin-top:22px;border-top:1px solid var(--rule);
+    padding-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Commons dynamics · live model</div>
+  <h1>Does protection survive its own dynamics?</h1>
+  <p class="sub">Three strategies compete on a regenerating commons. Enforcers suppress
+    defectors but pay a cost. Flip how that cost is funded and watch the enforcer population
+    live or die over 100 generations.</p>
+
+  <div class="controls">
+    <div class="switch" id="switch">
+      <button class="seg active" data-mode="unfunded">
+        <div class="t">Unfunded</div><div class="m">confiscated payoff → discarded</div></button>
+      <button class="seg" data-mode="selffund">
+        <div class="t">Self-funded</div><div class="m">confiscated payoff → enforcers</div></button>
+    </div>
+    <div class="play">
+      <div class="row">
+        <button class="btn" id="play">Pause</button>
+        <button class="btn ghost" id="reset">Reset</button>
+        <div class="gen">gen <b id="gennum">000</b>/100</div>
+      </div>
+      <label class="cost">Enforcement cost
+        <input type="range" id="cost" min="0" max="3" step="0.1" value="1.0" />
+        <span class="costval" id="costval">1.0</span></label>
+      <label class="cost" id="leakrow" style="display:none">Funding leakage
+        <input type="range" id="leak" min="0" max="1" step="0.05" value="0" />
+        <span class="costval" id="leakval">0%</span></label>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <div class="ph"><span class="pt">Population</span><span class="ps">share of agents by strategy</span></div>
+      <svg id="popsvg" viewBox="0 0 600 250" width="100%" style="display:block"></svg>
+      <div class="legend">
+        <span class="lg"><i style="background:var(--coop)"></i>Cooperate</span>
+        <span class="lg"><i style="background:var(--def)"></i>Defect</span>
+        <span class="lg"><i style="background:var(--enf)"></i>Enforce</span>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="ph"><span class="pt">Readout</span><span class="ps">current state</span></div>
+      <div class="stat"><i style="background:var(--coop)"></i><span class="sl">Cooperate</span><span class="sv" id="rC">33.3%</span></div>
+      <div class="stat"><i style="background:var(--def)"></i><span class="sl">Defect</span><span class="sv" id="rD">33.3%</span></div>
+      <div class="stat big"><i style="background:var(--enf)"></i><span class="sl">Enforce</span><span class="sv" id="rE">33.3%</span></div>
+      <div class="stat"><i style="background:var(--res)"></i><span class="sl">Resource</span><span class="sv" id="rR">100.0</span></div>
+      <div class="verdict" id="verdict">
+        <div class="vk" id="vk">Running…</div>
+        <div class="vb" id="vb"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:16px">
+    <div class="ph"><span class="pt">Resource level</span><span class="ps">the shared stock, regenerating and harvested</span></div>
+    <svg id="ressvg" viewBox="0 0 600 130" width="100%" style="display:block"></svg>
+  </div>
+
+  <p id="osccap" class="foot" style="margin-top:14px;border-top:none;padding-top:0;display:none">
+    <b style="color:var(--enf)">Self-funded enforcement oscillates because success destroys its
+    own funding source.</b> As defectors decline, confiscated payoff declines. Enforcement
+    weakens. Defectors recover. Funding returns. The two populations become dynamically
+    coupled — in this model architecture, revenue is proportional to remaining defection.
+  </p>
+
+  <p class="foot">Toy model — a minimal recent-payoff replicator on a logistically regenerating
+    resource (α=2, g=δ=0.20, κ=2, 5-step memory). Live equations, not a recording. The ordering
+    shown here survives finite-N stochastic and spatial versions; specific numbers are
+    model-dependent and carry no claim about real systems. Tip: slide the enforcement cost up
+    under <i>Unfunded</i> to watch the collapse threshold, then flip to <i>Self-funded</i> at
+    the same cost.</p>
+</div>
+
+<script>
+const C={ink:"#11151B",coop:"#5BBF90",def:"#E2564B",enf:"#D9A441",res:"#4F8FB0",
+  mut:"#8B97A6",rule:"#2B3440"};
+const GENS=100;
+
+function simulate(mode,cost,leak){
+  const Rmax=100,eps=0.005,a=2.0,g=0.20,delta=0.20,kappa=2.0;
+  const redist=mode==="selffund"?1.0:0.0;
+  let fC=1/3,fD=1/3,fE=1/3,R=Rmax,win=[];
+  const t=[{gen:0,C:fC,D:fD,E:fE,R:R}];
+  for(let i=0;i<GENS;i++){
+    const base=12*Math.pow(R/Rmax,a);
+    const sup=Math.min(Math.max(kappa*fE,0),1);
+    const loot=fD*base*sup;
+    const pC=5, pD=base*(1-sup);
+    let pE=5-cost; if(redist>0&&fE>1e-9) pE+=redist*(1-leak)*loot/fE; // leak = transfer friction
+    win.push([pC,pD,pE]); if(win.length>5) win.shift();
+    let rC=0,rD=0,rE=0; for(const w of win){rC+=w[0];rD+=w[1];rE+=w[2];}
+    const n=win.length; rC/=n; rD/=n; rE/=n;
+    R=R+g*R*(1-R/Rmax)-delta*fD*Rmax; if(R<0)R=0; if(R>Rmax)R=Rmax;
+    const avg=fC*rC+fD*rD+fE*rE;
+    fC=fC*rC/avg; fD=fD*rD/avg; fE=fE*rE/avg;
+    fC=(1-eps)*fC+eps/3; fD=(1-eps)*fD+eps/3; fE=(1-eps)*fE+eps/3;
+    const s=fC+fD+fE; fC/=s; fD/=s; fE/=s;
+    t.push({gen:i+1,C:fC,D:fD,E:fE,R:R});
+  }
+  return t;
+}
+
+// chart geometry
+const PW=600,PH=250,pad={l:34,r:10,t:10,b:22};
+const RW=600,RH=130;
+const xMap=(g,W)=>pad.l+(g/GENS)*(W-pad.l-pad.r);
+const yPop=(v)=>pad.t+(1-v)*(PH-pad.t-pad.b);
+const yRes=(v)=>pad.t+(1-v/100)*(RH-pad.t-pad.b);
+const el=id=>document.getElementById(id);
+const pct=x=>(x*100).toFixed(1)+"%";
+
+function line(data,key,yfn){
+  let d=""; data.forEach((p,i)=>{ d+=(i?"L":"M")+xMap(p.gen,PW).toFixed(1)+","+yfn(p[key]).toFixed(1)+" "; });
+  return d.trim();
+}
+function gridlines(W,H,steps,yfn,maxv){
+  let s="";
+  for(let k=0;k<=steps;k++){ const v=maxv*k/steps; const y=yfn(v).toFixed(1);
+    s+=`<line class="gl" x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}"/>`;
+    s+=`<text class="axis" x="${pad.l-6}" y="${(+y+3)}" text-anchor="end">${Math.round(maxv===1?v*100:v)}</text>`; }
+  return s;
+}
+
+let mode="unfunded", cost=1.0, leak=0, head=0, playing=true, traj=simulate(mode,cost,leak), tid=null;
+const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function render(){
+  const shown=traj.slice(0,head+1);
+  const cur=traj[head]||traj[traj.length-1];
+  const done=head>=GENS;
+  const px=xMap(cur.gen,PW).toFixed(1), rx=xMap(cur.gen,RW).toFixed(1);
+
+  el("popsvg").innerHTML=
+    gridlines(PW,PH,4,yPop,1)+
+    `<line x1="${px}" y1="${pad.t}" x2="${px}" y2="${PH-pad.b}" stroke="${C.mut}" stroke-width="1" opacity="0.4"/>`+
+    `<path d="${line(shown,'C',yPop)}" fill="none" stroke="${C.coop}" stroke-width="2"/>`+
+    `<path d="${line(shown,'D',yPop)}" fill="none" stroke="${C.def}" stroke-width="2"/>`+
+    `<path d="${line(shown,'E',yPop)}" fill="none" stroke="${C.enf}" stroke-width="2.6"/>`;
+
+  const base=yRes(0).toFixed(1);
+  let area=line(shown,'R',yRes);
+  if(shown.length){ area="M"+xMap(shown[0].gen,RW).toFixed(1)+","+base+" "+area.slice(1)+
+    " L"+xMap(shown[shown.length-1].gen,RW).toFixed(1)+","+base+" Z"; }
+  el("ressvg").innerHTML=
+    gridlines(RW,RH,2,yRes,100)+
+    `<line x1="${rx}" y1="${pad.t}" x2="${rx}" y2="${RH-pad.b}" stroke="${C.mut}" stroke-width="1" opacity="0.4"/>`+
+    `<path d="${area}" fill="${C.res}" fill-opacity="0.3" stroke="none"/>`+
+    `<path d="${line(shown,'R',yRes)}" fill="none" stroke="${C.res}" stroke-width="2"/>`;
+
+  el("rC").textContent=pct(cur.C); el("rD").textContent=pct(cur.D);
+  el("rE").textContent=pct(cur.E); el("rR").textContent=cur.R.toFixed(1);
+  el("osccap").style.display = mode==="selffund" ? "block" : "none";
+  el("leakrow").style.display = mode==="selffund" ? "flex" : "none";
+  el("gennum").textContent=String(head).padStart(3,"0");
+  el("play").textContent=done?"Replay":(playing?"Pause":"Play");
+
+  const v=el("verdict");
+  if(done){
+    const won=traj[GENS].E>=0.05;
+    v.className="verdict "+(won?"win":"lose");
+    el("vk").textContent="Verdict";
+    el("vb").innerHTML=won
+      ? `<b style="color:${C.coop}">Enforcers persisted.</b> Defection held to ${pct(traj[GENS].D)}, resource at ${traj[GENS].R.toFixed(0)}. The return to protection was captured privately.`
+      : `<b style="color:${C.def}">Enforcers went extinct.</b> The benefit was shared but the cost was not — cooperators free-rode, and protection collapsed back to baseline.`;
+  }else{
+    v.className="verdict";
+    el("vk").textContent="Running…";
+    el("vb").innerHTML = mode==="selffund"
+      ? "The return to enforcing is captured privately by enforcers."
+      : "Enforcers pay the cost. Everyone shares the benefit.";
+  }
+}
+
+function tick(){
+  if(!playing) return;
+  if(head>=GENS){ playing=false; render(); return; }
+  head++; render();
+  tid=setTimeout(tick,45);
+}
+function restart(){ clearTimeout(tid); head=0; playing=true; render(); tick(); }
+function recompute(){ traj=simulate(mode,cost,leak); clearTimeout(tid);
+  if(reduce){ head=GENS; playing=false; render(); return; }
+  head=0; playing=true; render(); tick(); }
+
+document.querySelectorAll(".seg").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".seg").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active"); mode=b.dataset.mode; recompute();
+}));
+el("play").addEventListener("click",()=>{
+  if(head>=GENS){ restart(); return; }
+  playing=!playing; render(); if(playing) tick();
+});
+el("reset").addEventListener("click",restart);
+el("cost").addEventListener("input",e=>{ cost=parseFloat(e.target.value);
+  el("costval").textContent=cost.toFixed(1); recompute(); });
+el("leak").addEventListener("input",e=>{ leak=parseFloat(e.target.value);
+  el("leakval").textContent=Math.round(leak*100)+"%"; recompute(); });
+
+recompute();
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+Cell P=1.0 L=5. Repair baseline: NO protective regime (inert or subsidy).
+Enforcement reduces defect payoff x(1-kappa*fE), no restoration.
+
+E1  FREE enforcement (cost=0): does enforcement-class protect? alpha* DOWN = yes.
+ kappa   alpha*    <fE>    <fD>
+   0.0     3.80   0.415   0.170
+   0.5     2.90   0.419   0.161
+   1.0     2.00   0.444   0.112
+   2.0     0.50   0.499   0.002
+   4.0     0.50   0.499   0.002
+
+E2  COSTLY enforcement (kappa=2 fixed): sweep policing cost. When do enforcers die?
+  cost   alpha*    <fE>    <fD>
+   0.0     0.50   0.499   0.002
+   0.5     2.50   0.020   0.133
+   1.0     2.60   0.009   0.145
+   2.0     2.60   0.004   0.135
+   3.0     2.60   0.003   0.142
