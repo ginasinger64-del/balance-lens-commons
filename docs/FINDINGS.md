@@ -566,6 +566,45 @@ architecture makes PROTECTION ITSELF evolutionarily viable.
   measure oscillation period tau at the P=1.5 cells (peak-spacing / FFT on the R trace)
   and check whether the alpha* hump tracks tau/lag hitting a small-integer ratio.
 
+## Result 10 — EXCLUDABILITY IS A CONTROL PARAMETER (ecology-invariant directional law)
+
+The recipient-swap of Result 9 was all-or-nothing (private vs pooled). Result 10 makes the
+private fraction continuous: r = fraction of confiscated payoff routed PRIVATELY to enforcers;
+(1-r) pooled to everyone. Same suppression, same total extraction; only r changes.
+(excludability.py, excludability_finiteN.py, excludability_spatial.py)
+
+                MEAN-FIELD          FINITE-N FERMI       SPATIAL LATTICE
+  r       fE     regime         fE     R              fE     fD     R
+  0.0    .008    collapse      .007   40.6           .029   .615   68
+  0.2    .008    collapse      .018   42.4           .124   .517   75
+  0.4    .008    collapse      .062   51.0           .247   .326   86
+  0.6    .008    collapse      .100   56.8           .250   .299   87
+  0.8    .389    IGNITE        .159   63.5           .267   .268   89
+  1.0    .479    protected     .216   70.2           .274   .260   89
+
+FINDING: across all three ecologies, raising the private fraction r monotonically increases
+enforcer persistence and resource health and decreases defection. The DIRECTION is invariant.
+
+SHARP vs SOFT (the honest correction): mean-field shows a clean PHASE TRANSITION -- nothing
+until r*~0.8, then ignition. Finite-N and spatial SOFTEN it into a monotone RAMP (enforcers
+lift off by r~0.4, no snap). This is the same mean-field-sharpens / noise-rounds pattern as
+Result 7. So the robust claim is NOT "there is a critical threshold r*=0.8" -- that exact
+value dissolves under noise. The robust claim is DIRECTIONAL and ecology-invariant.
+
+ROBUST CLAIM (the strongest single statement in the repo):
+  Coupling consequences back to the actor that generated them systematically increases the
+  persistence of protective behavior -- across mean-field, finite-N stochastic, and spatial
+  ecologies. Protection does not scale with how much value is recovered; it scales with how
+  much of that value remains coupled (excludably) to the protector.
+
+  This reframes the whole intervention arc: the operative variable is the RETURN PATHWAY --
+  what fraction of the consequence of a protective act stays bonded to its performer. Result 9
+  (excludability) is the r=0 vs r=1 endpoints; Result 10 is the full axis between them.
+  Caveat: r* is parameter-dependent (moves with cost/kappa); the threshold STRUCTURE and the
+  directional dependence are the results, not the number 0.8.
+
+---
+
 ## Open leads (the hunt)
 
   ROBUSTNESS PROGRAM COMPLETE (Results 7 + 8): hierarchy survives mean-field, finite-N Fermi,
@@ -605,6 +644,9 @@ architecture makes PROTECTION ITSELF evolutionarily viable.
 - robust.py / robust.log, robust2.py / robust2.log — finite-N Fermi kill-test (Result 7)
 - spatial.py / spatial.log, spatial_diff.py / spatial_diff.log — spatial lattice + diffusion (Result 8)
 - discriminate.py / discriminate.log — mechanism discrimination (Result 9: excludability principle)
+- excludability.py / .log — excludability sweep, mean-field (Result 10: sharp transition r*~0.8)
+- excludability_finiteN.py / .log — finite-N Fermi r-sweep (Result 10: softened ramp)
+- excludability_spatial.py / .log — spatial lattice r-sweep (Result 10: directional law survives)
 - SYNTHESIS.md                   — narrative tying Results 1-9 to the original question
 - FINDINGS.md                    — this file
 

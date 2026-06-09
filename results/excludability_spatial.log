@@ -1,0 +1,10 @@
+SPATIAL LATTICE excludability sweep (50x50, 2 seeds). Local resource+diffusion, local Fermi.
+Does the directional dependence (more private r -> more enforcement) survive a third ecology?
+
+    r    <fE>    <fD>     <R>
+  0.0   0.029   0.615    68.4
+  0.2   0.124   0.517    74.7
+  0.4   0.247   0.326    85.7
+  0.6   0.250   0.299    87.0
+  0.8   0.267   0.268    88.6
+  1.0   0.274   0.260    88.9

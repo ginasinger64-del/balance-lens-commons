@@ -1,6 +1,6 @@
 # Synthesis — Resource-Coupled Field
 
-*Companion to FINDINGS.md (Results 1–9). This is the narrative; FINDINGS is the evidence.*
+*Companion to FINDINGS.md (Results 1–10). This is the narrative; FINDINGS is the evidence.*
 
 ## The question
 
@@ -146,6 +146,19 @@ This is the answer to the original question. Local optimization stays coupled to
 persistence not by eliminating exploitation, and not by patching the damage it does, but by
 making the *act of protection* a locally winning strategy — which, mechanically, means making
 its payoff excludable.
+
+## Result 10 — excludability is a control parameter (added)
+
+The recipient-swap (Result 9) generalizes: route a continuous fraction r of confiscated payoff
+privately to enforcers. Across mean-field, finite-N stochastic, and spatial ecologies, raising r
+monotonically increases enforcement persistence and resource health. Mean-field shows a sharp
+phase transition (r*~0.8); noise and space soften it to a monotone ramp. The exact threshold is
+parameter-dependent and dissolves under noise; the *direction* is ecology-invariant.
+
+**The cleanest statement of the whole project:** protection does not scale with how much value
+is recovered — it scales with how much of that value remains coupled (excludably) to the
+protector. The operative variable is the *return pathway*: what fraction of the consequence of a
+protective act stays bonded to its performer.
 
 ## What this is and is not
 

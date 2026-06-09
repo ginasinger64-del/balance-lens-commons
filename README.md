@@ -1,34 +1,56 @@
-# Excludability and the survival of protective behavior on a regenerating commons
+# Why do some protective systems survive their own incentives while others collapse?
 
-A minimal evolutionary-game study of one question:
+A series of falsification experiments exploring which mechanisms let protective behavior
+persist under local optimization pressure on a regenerating commons.
 
-> **Can local optimization become self-limiting without external control — and if a
-> protective behavior is added, when does it survive the system's own dynamics?**
+It started as a toy commons model and a narrow question — *can local optimization become
+self-limiting without external control?* — and became, after ten rounds of killing its own
+hypotheses, a falsification trail that keeps pointing at one variable: **return-path
+coupling.**
+
+**The claim that survived:**
+
+> Protective behavior persists in proportion to how strongly the *consequences* of protection
+> remain coupled to the protector. Protection does not scale with how much value is recovered;
+> it scales with how much of that value stays coupled (excludably) to the protector.
+
+This is not asserted — it's what was left standing after the more obvious candidates were
+falsified by their own tests.
+
+**The arc, in five steps:**
+
+1. **Ratio control failed.** The obvious knob — extraction/regeneration ratio (δ/g) — does
+   not govern resilience. Falsified. (Result 1)
+2. **Timescale coupling emerged.** The leading-order controls are the dimensionless groups
+   g·L and δ·L — resource speed measured against the selection-update lag. (Results 2–3)
+3. **A third clock explained the anomalies.** Strong-drive non-monotonicity and a weak-drive
+   residual were one effect: the selection/resource clock ratio. (Results 3c–3d)
+4. **Restoration consistently failed as a protective mechanism.** Refilling a shared stock
+   subsidizes the exploiters who consume it; there is no protective regime. (Results 4–6)
+5. **Excludability emerged as the most robust control parameter** across mean-field, finite-N
+   stochastic, and spatial ecologies. The strongest single result in the repo. (Results 9–10)
+
+The strongest figure is the **three-ecology excludability sweep** (Result 10): mean-field
+shows a sharp transition, finite-N and spatial soften it to a ramp, but the *direction* is
+identical everywhere — more privately-coupled return → more persistent protection. That
+directional law survived every kill-test.
+
+---
+
+## The model
 
 Three strategies live on a logistically regenerating resource: **Cooperate**, **Defect**
 (payoff coupled to the resource it depletes), and a third **Repair/Enforce** slot whose
-design is varied. The headline result:
-
-> **A protective mechanism survives if and only if its benefit is an *excludable private
-> return* captured by the agents who bear its cost.** Restoration fails (it refills a shared
-> stock exploiters consume); unfunded enforcement collapses (suppression is a public good
-> others free-ride); pooled-funded enforcement collapses for the same reason; only
-> *self-funded* enforcement — where confiscated payoff goes to enforcers specifically —
-> survives, and it does so across mean-field, finite-N stochastic, and spatial ecologies.
-
-The core is backed by an identity, not a fit: under any pooled redistribution the enforcer's
-payoff minus the cooperator's is exactly **−cost**, for any pool size, so enforcers always lag
+design is varied. The mechanistic core is backed by an identity, not a fit: under any pooled
+redistribution the enforcer's payoff minus the cooperator's is exactly **−cost**, for any pool
+size, so enforcers always lag
 and go extinct. Only a private (excludable) return flips the sign.
 
-## Try it
+## Try it (no install)
 
-**▶ Live demo (runs in your browser, nothing to install):**
-https://ginasinger64-del.github.io/balance-lens-commons/demo/commons-dashboard.html
-
-Toggle Unfunded ↔ Self-funded and watch the enforcer population die or persist; slide
-enforcement cost and funding-leakage to find the thresholds.
-
-(Or download `demo/commons-dashboard.html` and double-click it locally — same thing, no dependencies.)
+Open **`demo/commons-dashboard.html`** by double-clicking it — it runs the live model in a
+browser with no dependencies. Toggle Unfunded ↔ Self-funded and watch the enforcer
+population die or persist; slide enforcement cost and funding-leakage to find the thresholds.
 
 ## Scope (read this first)
 
@@ -51,7 +73,7 @@ demo/       commons-dashboard.html  — open in a browser, zero dependencies (al
 src/        simulation scripts (Python, NumPy; spatial/robustness also use scipy)
 results/    captured stdout logs from each script (one .log per .py)
 docs/
-  FINDINGS.md    full result-by-result lab notebook (Results 1-9, incl. falsified hypotheses)
+  FINDINGS.md    full result-by-result lab notebook (Results 1-10, incl. falsified hypotheses)
   SYNTHESIS.md   the narrative: how the pieces fit into one principle
 ```
 
@@ -94,6 +116,7 @@ Notes on reproducibility:
 | `robust.py`, `robust2.py` | finite-N Fermi: hierarchy survives ordinally | 7 |
 | `spatial.py`, `spatial_diff.py` | spatial lattice + diffusion: hierarchy survives | 8 |
 | `discriminate.py` | **the spine** — recipient-swap isolates excludability | 9 |
+| `excludability.py`, `excludability_finiteN.py`, `excludability_spatial.py` | r-sweep: excludability as a control parameter; directional law survives all 3 ecologies | 10 |
 
 ## The model in one paragraph
 
@@ -104,8 +127,9 @@ restores the stock) or enforce (suppresses defect payoff by `1−κ·f_E`, pays 
 funded from confiscated defector payoff). Selection is a recent-payoff replicator (mean-field),
 a finite-N Fermi imitation (stochastic), or local Fermi imitation on a lattice (spatial).
 
-## License 
-MIT — see LICENSE.
+## License
+
+Suggested: MIT or CC-BY-4.0 — pick before pushing. (Add a LICENSE file via GitHub's template.)
 
 ## Prior work
 
