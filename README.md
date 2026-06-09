@@ -1,3 +1,56 @@
+# Excludability and the survival of protective behavior on a regenerating commons
+
+A minimal evolutionary-game study of one question:
+
+> **Can local optimization become self-limiting without external control — and if a
+> protective behavior is added, when does it survive the system's own dynamics?**
+
+Three strategies live on a logistically regenerating resource: **Cooperate**, **Defect**
+(payoff coupled to the resource it depletes), and a third **Repair/Enforce** slot whose
+design is varied. The headline result:
+
+> **A protective mechanism survives if and only if its benefit is an *excludable private
+> return* captured by the agents who bear its cost.** Restoration fails (it refills a shared
+> stock exploiters consume); unfunded enforcement collapses (suppression is a public good
+> others free-ride); pooled-funded enforcement collapses for the same reason; only
+> *self-funded* enforcement — where confiscated payoff goes to enforcers specifically —
+> survives, and it does so across mean-field, finite-N stochastic, and spatial ecologies.
+
+The core is backed by an identity, not a fit: under any pooled redistribution the enforcer's
+payoff minus the cooperator's is exactly **−cost**, for any pool size, so enforcers always lag
+and go extinct. Only a private (excludable) return flips the sign.
+
+## Try it (no install)
+
+Open **`demo/commons-dashboard.html`** by double-clicking it — it runs the live model in a
+browser with no dependencies. Toggle Unfunded ↔ Self-funded and watch the enforcer
+population die or persist; slide enforcement cost and funding-leakage to find the thresholds.
+
+## Scope (read this first)
+
+This is a **toy model** — a minimal replicator/imitation dynamic on a single regenerating
+resource, one payoff family, deliberately stripped down. It is **not** validated outside this
+model, and it makes **no** direct claim about real institutions or AI systems; any such mapping
+is an analogy that generates hypotheses, nothing more. The *qualitative* hierarchy is robust
+across the ecologies tested; specific transition numbers are model/architecture-dependent and
+should not be quoted as physical (see `docs/FINDINGS.md`, Results 3d and 7).
+
+The work is presented honestly including its **dead ends** — several hypotheses (period/lag
+resonance, finite-step discretization, an extraction/regeneration ratio law, cause-aware
+repair, "cause vs symptom") were proposed and then *falsified by their own tests*. Those are
+documented in `docs/FINDINGS.md` on purpose; the self-correction is part of the evidence.
+
+## Repository layout
+
+```
+demo/       commons-dashboard.html  — open in a browser, zero dependencies (also a .jsx version)
+src/        simulation scripts (Python, NumPy; spatial/robustness also use scipy)
+results/    captured stdout logs from each script (one .log per .py)
+docs/
+  FINDINGS.md    full result-by-result lab notebook (Results 1-9, incl. falsified hypotheses)
+  SYNTHESIS.md   the narrative: how the pieces fit into one principle
+```
+
 ## How to run the Python
 
 ```bash
@@ -37,7 +90,6 @@ Notes on reproducibility:
 | `robust.py`, `robust2.py` | finite-N Fermi: hierarchy survives ordinally | 7 |
 | `spatial.py`, `spatial_diff.py` | spatial lattice + diffusion: hierarchy survives | 8 |
 | `discriminate.py` | **the spine** — recipient-swap isolates excludability | 9 |
-| `excludability.py`, `excludability_finiteN.py`, `excludability_spatial.py` | r-sweep: excludability as a control parameter; directional law survives all 3 ecologies | 10 |
 
 ## The model in one paragraph
 
@@ -50,7 +102,7 @@ a finite-N Fermi imitation (stochastic), or local Fermi imitation on a lattice (
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+Suggested: MIT or CC-BY-4.0 — pick before pushing. (Add a LICENSE file via GitHub's template.)
 
 ## Prior work
 
