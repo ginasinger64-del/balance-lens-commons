@@ -20,11 +20,15 @@ The core is backed by an identity, not a fit: under any pooled redistribution th
 payoff minus the cooperator's is exactly **−cost**, for any pool size, so enforcers always lag
 and go extinct. Only a private (excludable) return flips the sign.
 
-## Try it (no install)
+## Try it
 
-Open **`demo/commons-dashboard.html`** by double-clicking it — it runs the live model in a
-browser with no dependencies. Toggle Unfunded ↔ Self-funded and watch the enforcer
-population die or persist; slide enforcement cost and funding-leakage to find the thresholds.
+**▶ Live demo (runs in your browser, nothing to install):**
+https://ginasinger64-del.github.io/balance-lens-commons/demo/commons-dashboard.html
+
+Toggle Unfunded ↔ Self-funded and watch the enforcer population die or persist; slide
+enforcement cost and funding-leakage to find the thresholds.
+
+(Or download `demo/commons-dashboard.html` and double-click it locally — same thing, no dependencies.)
 
 ## Scope (read this first)
 
