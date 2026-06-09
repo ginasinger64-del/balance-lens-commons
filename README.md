@@ -100,9 +100,8 @@ restores the stock) or enforce (suppresses defect payoff by `1−κ·f_E`, pays 
 funded from confiscated defector payoff). Selection is a recent-payoff replicator (mean-field),
 a finite-N Fermi imitation (stochastic), or local Fermi imitation on a lattice (spatial).
 
-## License
-
-Suggested: MIT or CC-BY-4.0 — pick before pushing. (Add a LICENSE file via GitHub's template.)
+## License 
+MIT — see LICENSE.
 
 ## Prior work
 
